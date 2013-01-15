@@ -12,3 +12,4 @@
 #include <moaiext-android/MOAIMoviePlayerAndroid.h>
 #include <moaiext-android/MOAINotificationsAndroid.h>
 #include <moaiext-android/MOAITapjoyAndroid.h>
+#include <moaiext-android/MOAIOuyaAndroid.h>
