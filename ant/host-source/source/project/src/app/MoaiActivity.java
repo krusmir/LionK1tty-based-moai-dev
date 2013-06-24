@@ -375,14 +375,15 @@ public class MoaiActivity extends Activity {
            	float rightAxisX = c.getAxisValue(OuyaController.AXIS_RS_X);
            	float rightAxisY = c.getAxisValue(OuyaController.AXIS_RS_Y);
 
-           	float leftStickMag = (float) Math.sqrt(leftAxisX * leftAxisX + leftAxisY * leftAxisY);
-           	float rightStickMag = (float) Math.sqrt(rightAxisX * rightAxisX + rightAxisY * rightAxisY);
-           	final float c_minStickDistance = 0.2f;
+           	// User should be able to handle raw input, then modify as he wants.
+		//float leftStickMag = (float) Math.sqrt(leftAxisX * leftAxisX + leftAxisY * leftAxisY);
+           	//float rightStickMag = (float) Math.sqrt(rightAxisX * rightAxisX + rightAxisY * rightAxisY);
+           	//final float c_minStickDistance = 0.2f;
 
-           	if (leftStickMag >= c_minStickDistance || rightStickMag >= c_minStickDistance){
+           	//if (leftStickMag >= c_minStickDistance || rightStickMag >= c_minStickDistance){
            		// Call MoaiOuya class
-           		MoaiOuya.NotifyOuyaMotionEvent(leftAxisX, leftAxisY, rightAxisX, rightAxisY, odid);
-           	}
+           	MoaiOuya.NotifyOuyaMotionEvent(leftAxisX, leftAxisY, rightAxisX, rightAxisY, odid);
+           	//}
         }
         return handled;
     }
