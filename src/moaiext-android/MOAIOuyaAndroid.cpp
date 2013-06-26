@@ -17,20 +17,20 @@ extern JavaVM* jvm;
 //================================================================//
 
 //----------------------------------------------------------------//
-extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaButtonDown ( JNIEnv* env, jclass obj, jint code, jint deviceId ) {
-	MOAIOuyaAndroid::Get ().NotifyOuyaButtonDown ( code , deviceId );
+extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaButtonDown ( JNIEnv* env, jclass obj, jint code, jint player ) {
+	MOAIOuyaAndroid::Get ().NotifyOuyaButtonDown ( code , player );
 }
 
-extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaButtonUp ( JNIEnv* env, jclass obj, jint code, jint deviceId ) {
-	MOAIOuyaAndroid::Get ().NotifyOuyaButtonUp ( code , deviceId );
+extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaButtonUp ( JNIEnv* env, jclass obj, jint code, jint player ) {
+	MOAIOuyaAndroid::Get ().NotifyOuyaButtonUp ( code , player );
 }
 
-extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaMotionEvent ( JNIEnv* env, jclass obj, jfloat leftAxisX, jfloat leftAxisY, jfloat rightAxisX, jfloat rightAxisY, jint deviceId ) {
-	MOAIOuyaAndroid::Get ().NotifyOuyaMotionEvent ( leftAxisX , leftAxisY, rightAxisX, rightAxisY,  deviceId );
+extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaMotionEvent ( JNIEnv* env, jclass obj, jfloat leftAxisX, jfloat leftAxisY, jfloat rightAxisX, jfloat rightAxisY, jint player ) {
+	MOAIOuyaAndroid::Get ().NotifyOuyaMotionEvent ( leftAxisX , leftAxisY, rightAxisX, rightAxisY,  player );
 }
 
 //----------------------------------------------------------------//
-void MOAIOuyaAndroid::NotifyOuyaButtonDown ( int keyCode, int deviceId ) {
+void MOAIOuyaAndroid::NotifyOuyaButtonDown ( int keyCode, int player ) {
 
 	MOAILuaRef& callback = this->mListeners [ OUYA_BUTTON_DOWN ];
 
@@ -39,7 +39,7 @@ void MOAIOuyaAndroid::NotifyOuyaButtonDown ( int keyCode, int deviceId ) {
 		MOAILuaStateHandle state = callback.GetSelf ();
 
 		state.Push ( keyCode );
-		state.Push ( deviceId );
+		state.Push ( player );
 		
 		state.DebugCall ( 2, 0 );
 
@@ -47,7 +47,7 @@ void MOAIOuyaAndroid::NotifyOuyaButtonDown ( int keyCode, int deviceId ) {
 	
 }
 
-void MOAIOuyaAndroid::NotifyOuyaButtonUp ( int keyCode, int deviceId ) {
+void MOAIOuyaAndroid::NotifyOuyaButtonUp ( int keyCode, int player ) {
 
 	MOAILuaRef& callback = this->mListeners [ OUYA_BUTTON_UP ];
 
@@ -56,7 +56,7 @@ void MOAIOuyaAndroid::NotifyOuyaButtonUp ( int keyCode, int deviceId ) {
 		MOAILuaStateHandle state = callback.GetSelf ();
 
 		state.Push ( keyCode );
-		state.Push ( deviceId );
+		state.Push ( player );
 		
 		state.DebugCall ( 2, 0 );
 
@@ -64,7 +64,7 @@ void MOAIOuyaAndroid::NotifyOuyaButtonUp ( int keyCode, int deviceId ) {
 	
 }
 
-void MOAIOuyaAndroid::NotifyOuyaMotionEvent ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY, int deviceId ) {
+void MOAIOuyaAndroid::NotifyOuyaMotionEvent ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY, int player ) {
 
 	MOAILuaRef& callback = this->mListeners [ OUYA_MOTION_EVENT ];
 
@@ -77,7 +77,7 @@ void MOAIOuyaAndroid::NotifyOuyaMotionEvent ( float leftAxisX, float leftAxisY, 
 		state.Push ( leftAxisY );
 		state.Push ( rightAxisX );
 		state.Push ( rightAxisY );
-		state.Push ( deviceId );
+		state.Push ( player );
 		
 		//state.DebugCall ( 3, 0 );
 		state.DebugCall ( 5, 0 );

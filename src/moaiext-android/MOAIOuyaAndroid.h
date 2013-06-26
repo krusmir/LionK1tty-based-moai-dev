@@ -90,9 +90,9 @@ public:
 	void    Finish                  ();
 			MOAIOuyaAndroid			();
 			~MOAIOuyaAndroid		();
-	void	NotifyOuyaButtonDown	( int keyCode, int deviceId );
-	void	NotifyOuyaButtonUp		( int keyCode, int deviceId );
-	void  	NotifyOuyaMotionEvent  ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY, int deviceId ); 
+	void	NotifyOuyaButtonDown	( int keyCode, int player );
+	void	NotifyOuyaButtonUp		( int keyCode, int player );
+	void  	NotifyOuyaMotionEvent  ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY, int player ); 
 	void	RegisterLuaClass		( MOAILuaState& state );
 };
 

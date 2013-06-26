@@ -95,6 +95,8 @@ public class MoaiActivity extends Activity {
 		
 		Moai.createContext ();
 		Moai.init ();
+	// Add init of Ouya Controller
+	OuyaController.init(this);
 		
         requestWindowFeature ( Window.FEATURE_NO_TITLE );
 	    getWindow ().addFlags ( WindowManager.LayoutParams.FLAG_FULLSCREEN );
@@ -349,43 +351,69 @@ public class MoaiActivity extends Activity {
 	@Override
 	public boolean onKeyDown (int keyCode, KeyEvent event) {
 	      boolean handled = OuyaController.onKeyDown(keyCode, event);
-	      int deviceId = event.getDeviceId();
+	     // int deviceId = event.getDeviceId();
+	      int  player = OuyaController.getPlayerNumByDeviceId(event.getDeviceId());
 	      // Call MoaiOuya class
-	      MoaiOuya.NotifyOuyaButtonDown(keyCode, deviceId); 
+	      MoaiOuya.NotifyOuyaButtonDown(keyCode, player); 
 	      return handled || super.onKeyDown(keyCode, event); 
 	}
 	
 	@Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         boolean handled = OuyaController.onKeyUp(keyCode, event);
-        int deviceId = event.getDeviceId();
+//        int deviceId = event.getDeviceId();
+        int player = OuyaController.getPlayerNumByDeviceId(event.getDeviceId());
         // Call MoaiOuya class
-        MoaiOuya.NotifyOuyaButtonUp(keyCode, deviceId);
+        MoaiOuya.NotifyOuyaButtonUp(keyCode, player);
         return handled || super.onKeyUp(keyCode, event);
     }
 
     // Have'nt gotten this to work yet - hav'nt had much time with it either
+	@Override
     public boolean onGenericMotionEvent(MotionEvent event) {
-        int odid = event.getDeviceId();
+//        int odid = event.getDeviceId();
+        int player =  OuyaController.getPlayerNumByDeviceId(event.getDeviceId());
         boolean handled = OuyaController.onGenericMotionEvent(event);
-		OuyaController c = OuyaController.getControllerByDeviceId(event.getDeviceId());
-        if (c != null) {
+//		OuyaController c = OuyaController.getControllerByDeviceId(event.getDeviceId());
+//        if (c != null) {
+/*
            	float leftAxisX = c.getAxisValue(OuyaController.AXIS_LS_X);
            	float leftAxisY = c.getAxisValue(OuyaController.AXIS_LS_Y);
            	float rightAxisX = c.getAxisValue(OuyaController.AXIS_RS_X);
            	float rightAxisY = c.getAxisValue(OuyaController.AXIS_RS_Y);
+*/
+                float leftAxisX = event.getAxisValue(OuyaController.AXIS_LS_X);
+                float leftAxisY = event.getAxisValue(OuyaController.AXIS_LS_Y);
+                float rightAxisX = event.getAxisValue(OuyaController.AXIS_RS_X);
+                float rightAxisY = event.getAxisValue(OuyaController.AXIS_RS_Y);
 
            	// User should be able to handle raw input, then modify as he wants.
 		//float leftStickMag = (float) Math.sqrt(leftAxisX * leftAxisX + leftAxisY * leftAxisY);
            	//float rightStickMag = (float) Math.sqrt(rightAxisX * rightAxisX + rightAxisY * rightAxisY);
-           	//final float c_minStickDistance = 0.2f;
+		boolean callNotification = false;
+           	float c_minStickDistance = OuyaController.STICK_DEADZONE * OuyaController.STICK_DEADZONE;
+		
+		if (leftAxisX * leftAxisX + leftAxisY * leftAxisY < c_minStickDistance){
+			leftAxisX = leftAxisY = 0.0f;
+		}
+		else{
 
-           	//if (leftStickMag >= c_minStickDistance || rightStickMag >= c_minStickDistance){
-           		// Call MoaiOuya class
-           	MoaiOuya.NotifyOuyaMotionEvent(leftAxisX, leftAxisY, rightAxisX, rightAxisY, odid);
-           	//}
-        }
-        return handled;
+			callNotification = true;
+		}
+		
+		if (rightAxisX * rightAxisX + rightAxisY * rightAxisY < c_minStickDistance){
+			rightAxisX = rightAxisY = 0.0f;
+		}
+		else{
+			callNotification = true;
+			
+           	}
+		if ( callNotification ){		
+			// Call MoaiOuya class
+           		MoaiOuya.NotifyOuyaMotionEvent(leftAxisX, leftAxisY, rightAxisX, rightAxisY, player);
+           	}
+  //      }
+        return handled || super.onGenericMotionEvent(event);
     }
 
 	//================================================================//
