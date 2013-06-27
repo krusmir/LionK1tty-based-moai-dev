@@ -92,7 +92,8 @@ public:
 			~MOAIOuyaAndroid		();
 	void	NotifyOuyaButtonDown	( int keyCode, int player );
 	void	NotifyOuyaButtonUp		( int keyCode, int player );
-	void  	NotifyOuyaMotionEvent  ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY, int player ); 
+	void  	NotifyOuyaMotionEvent  ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY,
+	                                 float l2Axis, float r2Axis, float touchpadX, float touchpadY, int player );
 	void	RegisterLuaClass		( MOAILuaState& state );
 };
 

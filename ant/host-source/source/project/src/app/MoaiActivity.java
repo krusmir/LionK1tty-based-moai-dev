@@ -95,8 +95,9 @@ public class MoaiActivity extends Activity {
 		
 		Moai.createContext ();
 		Moai.init ();
-	// Add init of Ouya Controller
-	OuyaController.init(this);
+
+	    // Add init of Ouya Controller
+	    OuyaController.init(this);
 		
         requestWindowFeature ( Window.FEATURE_NO_TITLE );
 	    getWindow ().addFlags ( WindowManager.LayoutParams.FLAG_FULLSCREEN );
@@ -351,7 +352,7 @@ public class MoaiActivity extends Activity {
 	@Override
 	public boolean onKeyDown (int keyCode, KeyEvent event) {
 	      boolean handled = OuyaController.onKeyDown(keyCode, event);
-	     // int deviceId = event.getDeviceId();
+	      //int player = event.getDeviceId();
 	      int  player = OuyaController.getPlayerNumByDeviceId(event.getDeviceId());
 	      // Call MoaiOuya class
 	      MoaiOuya.NotifyOuyaButtonDown(keyCode, player); 
@@ -361,19 +362,18 @@ public class MoaiActivity extends Activity {
 	@Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         boolean handled = OuyaController.onKeyUp(keyCode, event);
-//        int deviceId = event.getDeviceId();
+        //int player = event.getDeviceId();
         int player = OuyaController.getPlayerNumByDeviceId(event.getDeviceId());
         // Call MoaiOuya class
         MoaiOuya.NotifyOuyaButtonUp(keyCode, player);
         return handled || super.onKeyUp(keyCode, event);
     }
 
-    // Have'nt gotten this to work yet - hav'nt had much time with it either
 	@Override
     public boolean onGenericMotionEvent(MotionEvent event) {
-//        int odid = event.getDeviceId();
-        int player =  OuyaController.getPlayerNumByDeviceId(event.getDeviceId());
         boolean handled = OuyaController.onGenericMotionEvent(event);
+        //int player = event.getDeviceId();
+        int player =  OuyaController.getPlayerNumByDeviceId(event.getDeviceId());
 //		OuyaController c = OuyaController.getControllerByDeviceId(event.getDeviceId());
 //        if (c != null) {
 /*
@@ -381,11 +381,17 @@ public class MoaiActivity extends Activity {
            	float leftAxisY = c.getAxisValue(OuyaController.AXIS_LS_Y);
            	float rightAxisX = c.getAxisValue(OuyaController.AXIS_RS_X);
            	float rightAxisY = c.getAxisValue(OuyaController.AXIS_RS_Y);
+
 */
+
+                float touchpadX =0.0f;
+                float touchpadY = 0.0f;
                 float leftAxisX = event.getAxisValue(OuyaController.AXIS_LS_X);
                 float leftAxisY = event.getAxisValue(OuyaController.AXIS_LS_Y);
                 float rightAxisX = event.getAxisValue(OuyaController.AXIS_RS_X);
                 float rightAxisY = event.getAxisValue(OuyaController.AXIS_RS_Y);
+                float l2Axis = event.getAxisValue(OuyaController.AXIS_L2);
+                float r2Axis = event.getAxisValue(OuyaController.AXIS_R2);
 
            	// User should be able to handle raw input, then modify as he wants.
 		//float leftStickMag = (float) Math.sqrt(leftAxisX * leftAxisX + leftAxisY * leftAxisY);
@@ -408,9 +414,15 @@ public class MoaiActivity extends Activity {
 			callNotification = true;
 			
            	}
+        if (l2Axis > 0.0f || r2Axis > 0.0f )
+        {
+            callNotification = true;
+        }
+        //callNotification = true;
 		if ( callNotification ){		
 			// Call MoaiOuya class
-           		MoaiOuya.NotifyOuyaMotionEvent(leftAxisX, leftAxisY, rightAxisX, rightAxisY, player);
+           		MoaiOuya.NotifyOuyaMotionEvent(leftAxisX, leftAxisY, rightAxisX, rightAxisY, l2Axis, r2Axis,
+                           touchpadX, touchpadY, player);
            	}
   //      }
         return handled || super.onGenericMotionEvent(event);

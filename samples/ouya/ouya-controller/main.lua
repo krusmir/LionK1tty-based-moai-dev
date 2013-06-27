@@ -7,9 +7,13 @@
         function onOuyaButtonUp (keyCode, player)
                 print ( "moai: Ouya Button Up " .. keyCode .. " " .. player)
         end
-	function onGenericMotionEvent(leftAxisX, leftAxisY, rightAxisX, rightAxisY, player)
-		print ("moai: Left Axis X: " .. leftAxisX .. " Left Axis Y: " .. leftAxisY .." player: " ..player)
-                print ("moai: Right Axis X: " .. rightAxisX .. " Right Axis Y: " .. rightAxisY .." player: " ..player)
+	function onGenericMotionEvent(leftAxisX, leftAxisY, rightAxisX, rightAxisY, l2Axis, r2Axis, touchpadX, touchpadY, player)
+        print ("Start Motion Event by player: " .. player)
+	print ("moai: Left Axis X: " .. leftAxisX .. " Left Axis Y: " .. leftAxisY )
+        print ("moai: Right Axis X: " .. rightAxisX .. " Right Axis Y: " .. rightAxisY )
+        print ("moai: L2 Axis: " .. l2Axis .. " R2 Axis: " .. r2Axis )
+        print ("moai: Touchpad X: " .. touchpadX .. " TouchPad Y: " .. touchpadY )
+        print ("End Motion Event")
 	end
 
 
