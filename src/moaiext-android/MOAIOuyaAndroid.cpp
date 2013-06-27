@@ -26,10 +26,13 @@ extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaButtonUp ( JNIE
 }
 
 extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaMotionEvent ( JNIEnv* env, jclass obj,
- jfloat leftAxisX, jfloat leftAxisY, jfloat rightAxisX, jfloat rightAxisY, jfloat l2Axis, jfloat r2Axis,
+ jfloat leftAxisX, jfloat leftAxisY, jfloat rightAxisX, jfloat rightAxisY, jfloat l2Axis, jfloat r2Axis, jint player ) {
+	MOAIOuyaAndroid::Get ().NotifyOuyaMotionEvent ( leftAxisX , leftAxisY, rightAxisX, rightAxisY, l2Axis, r2Axis, player );
+}
+
+extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaMotionEventTouchpad ( JNIEnv* env, jclass obj,
  jfloat touchpadX, jfloat touchpadY, jint player ) {
-	MOAIOuyaAndroid::Get ().NotifyOuyaMotionEvent ( leftAxisX , leftAxisY, rightAxisX, rightAxisY, l2Axis, r2Axis,
-	  touchpadX, touchpadY, player );
+    MOAIOuyaAndroid::Get ().NotifyOuyaMotionEventTouchpad ( touchpadX, touchpadY, player );
 }
 
 //----------------------------------------------------------------//
@@ -68,7 +71,7 @@ void MOAIOuyaAndroid::NotifyOuyaButtonUp ( int keyCode, int player ) {
 }
 
 void MOAIOuyaAndroid::NotifyOuyaMotionEvent ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY,
- float l2Axis, float r2Axis, float touchpadX, float touchpadY,  int player ) {
+                                              float l2Axis, float r2Axis,  int player ) {
 
 	MOAILuaRef& callback = this->mListeners [ OUYA_MOTION_EVENT ];
 
@@ -83,17 +86,33 @@ void MOAIOuyaAndroid::NotifyOuyaMotionEvent ( float leftAxisX, float leftAxisY, 
 		state.Push ( rightAxisY );
 		state.Push ( l2Axis );
 		state.Push ( r2Axis );
-		state.Push ( touchpadX );
-        state.Push ( touchpadY );
 		state.Push ( player );
 		
 		//state.DebugCall ( 3, 0 );
-		state.DebugCall ( 9, 0 );
+		state.DebugCall ( 7, 0 );
 
 	}
 	
 }
 
+void MOAIOuyaAndroid::NotifyOuyaMotionEventTouchpad ( float touchpadX, float touchpadY,  int player ) {
+
+	MOAILuaRef& callback = this->mListeners [ OUYA_MOTION_EVENT_TOUCHPAD ];
+
+	if ( callback ) {
+
+		MOAILuaStateHandle state = callback.GetSelf ();
+
+
+		state.Push ( touchpadX );
+		state.Push ( touchpadY );
+		state.Push ( player );
+
+		state.DebugCall ( 3, 0 );
+
+	}
+
+}
 
 //================================================================//
 // MOAIOuyaAndroid
@@ -143,6 +162,8 @@ void MOAIOuyaAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "OUYA_BUTTON_DOWN",    ( u32 )OUYA_BUTTON_DOWN );
 	state.SetField ( -1, "OUYA_BUTTON_UP",    ( u32 )OUYA_BUTTON_UP );
 	state.SetField ( -1, "OUYA_MOTION_EVENT",    ( u32 )OUYA_MOTION_EVENT );
+	state.SetField ( -1, "OUYA_MOTION_EVENT_TOUCHPAD",    ( u32 )OUYA_MOTION_EVENT_TOUCHPAD );
+
 
 	/*
 	state.SetField ( -1, "AXIS_L2",    			( u32 )AXIS_L2 );

@@ -383,9 +383,15 @@ public class MoaiActivity extends Activity {
            	float rightAxisY = c.getAxisValue(OuyaController.AXIS_RS_Y);
 
 */
+        // TODO: 8194 is magic number for touchpad, need to find constant that defines it, or define it
+        if (event.getSource() == 8194){
 
-                float touchpadX =0.0f;
-                float touchpadY = 0.0f;
+                float touchpadX = event.getX();
+                float touchpadY = event.getY();
+
+                MoaiOuya.NotifyOuyaMotionEventTouchpad( touchpadX, touchpadY, player);
+        }
+        else{
                 float leftAxisX = event.getAxisValue(OuyaController.AXIS_LS_X);
                 float leftAxisY = event.getAxisValue(OuyaController.AXIS_LS_Y);
                 float rightAxisX = event.getAxisValue(OuyaController.AXIS_RS_X);
@@ -393,38 +399,35 @@ public class MoaiActivity extends Activity {
                 float l2Axis = event.getAxisValue(OuyaController.AXIS_L2);
                 float r2Axis = event.getAxisValue(OuyaController.AXIS_R2);
 
-           	// User should be able to handle raw input, then modify as he wants.
-		//float leftStickMag = (float) Math.sqrt(leftAxisX * leftAxisX + leftAxisY * leftAxisY);
-           	//float rightStickMag = (float) Math.sqrt(rightAxisX * rightAxisX + rightAxisY * rightAxisY);
-		boolean callNotification = false;
-           	float c_minStickDistance = OuyaController.STICK_DEADZONE * OuyaController.STICK_DEADZONE;
-		
-		if (leftAxisX * leftAxisX + leftAxisY * leftAxisY < c_minStickDistance){
-			leftAxisX = leftAxisY = 0.0f;
-		}
-		else{
+                // User should be able to handle raw input, then modify as he wants.
+                //float leftStickMag = (float) Math.sqrt(leftAxisX * leftAxisX + leftAxisY * leftAxisY);
+                //float rightStickMag = (float) Math.sqrt(rightAxisX * rightAxisX + rightAxisY * rightAxisY);
+                boolean callNotification = false;
+                float c_minStickDistance = OuyaController.STICK_DEADZONE * OuyaController.STICK_DEADZONE;
 
-			callNotification = true;
-		}
-		
-		if (rightAxisX * rightAxisX + rightAxisY * rightAxisY < c_minStickDistance){
-			rightAxisX = rightAxisY = 0.0f;
-		}
-		else{
-			callNotification = true;
-			
-           	}
-        if (l2Axis > 0.0f || r2Axis > 0.0f )
-        {
-            callNotification = true;
+                if (leftAxisX * leftAxisX + leftAxisY * leftAxisY < c_minStickDistance){
+                    leftAxisX = leftAxisY = 0.0f;
+                }
+                else{
+                    callNotification = true;
+                }
+
+                if (rightAxisX * rightAxisX + rightAxisY * rightAxisY < c_minStickDistance){
+                    rightAxisX = rightAxisY = 0.0f;
+                }
+                else{
+                    callNotification = true;
+                }
+
+                if (l2Axis > 0.0f || r2Axis > 0.0f ){
+                    callNotification = true;
+                }
+                if ( callNotification ){
+                    // Call MoaiOuya class
+                        MoaiOuya.NotifyOuyaMotionEvent(leftAxisX, leftAxisY, rightAxisX, rightAxisY, l2Axis, r2Axis, player);
+                    }
         }
-        //callNotification = true;
-		if ( callNotification ){		
-			// Call MoaiOuya class
-           		MoaiOuya.NotifyOuyaMotionEvent(leftAxisX, leftAxisY, rightAxisX, rightAxisY, l2Axis, r2Axis,
-                           touchpadX, touchpadY, player);
-           	}
-  //      }
+
         return handled || super.onGenericMotionEvent(event);
     }
 

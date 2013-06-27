@@ -55,6 +55,7 @@ public:
 		OUYA_BUTTON_DOWN,
 		OUYA_BUTTON_UP,
 		OUYA_MOTION_EVENT,
+		OUYA_MOTION_EVENT_TOUCHPAD,
 		TOTAL
 	};
 	
@@ -93,7 +94,8 @@ public:
 	void	NotifyOuyaButtonDown	( int keyCode, int player );
 	void	NotifyOuyaButtonUp		( int keyCode, int player );
 	void  	NotifyOuyaMotionEvent  ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY,
-	                                 float l2Axis, float r2Axis, float touchpadX, float touchpadY, int player );
+	                                 float l2Axis, float r2Axis, int player );
+    void  	NotifyOuyaMotionEventTouchpad  ( float touchpadX, float touchpadY, int player );
 	void	RegisterLuaClass		( MOAILuaState& state );
 };
 
