@@ -26,6 +26,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
@@ -383,14 +384,15 @@ public class MoaiActivity extends Activity {
            	float rightAxisY = c.getAxisValue(OuyaController.AXIS_RS_Y);
 
 */
-        // TODO: 8194 is magic number for touchpad, need to find constant that defines it, or define it
-        if (event.getSource() == 8194){
+        //if event is control touchpad, send the  getX and getY to EventTouchpad
+        if ((event.getSource() & InputDevice.SOURCE_CLASS_JOYSTICK) != 0){
 
                 float touchpadX = event.getX();
                 float touchpadY = event.getY();
 
                 MoaiOuya.NotifyOuyaMotionEventTouchpad( touchpadX, touchpadY, player);
         }
+        //else Its a controller event, and we send teh controller axis input
         else{
                 float leftAxisX = event.getAxisValue(OuyaController.AXIS_LS_X);
                 float leftAxisY = event.getAxisValue(OuyaController.AXIS_LS_Y);
