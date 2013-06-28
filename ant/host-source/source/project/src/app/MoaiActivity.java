@@ -137,7 +137,7 @@ public class MoaiActivity extends Activity {
 		LinearLayoutIMETrap con = MoaiKeyboard.getContainer ();
 		setContentView ( con );
 		con.addView ( mMoaiView );
-		con.addView ( MoaiKeyboard.getEditText ());
+//		con.addView ( MoaiKeyboard.getEditText ());
 		
     }
 
