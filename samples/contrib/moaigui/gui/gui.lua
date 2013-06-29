@@ -39,23 +39,23 @@
 
 local _M = {}
 
-require "gui\\support\\class"
+require "gui/support/class"
 
-local resources = require "gui\\support\\resources"
-local filesystem = require "gui\\support\\filesystem"
+local resources = require "gui/support/resources"
+local filesystem = require "gui/support/filesystem"
 
-local array = require "gui\\support\\array"
-local aevent = require "gui\\aevent"
-local factory = require "gui\\factory"
-local layoutparser = require "gui\\layoutparser"
-local theme = require "gui\\theme"
-local fonts = require "gui\\fonts"
-local textstyles = require "gui\\textstyles"
-local textures = require "gui\\textures"
+local array = require "gui/support/array"
+local aevent = require "gui/aevent"
+local factory = require "gui/factory"
+local layoutparser = require "gui/layoutparser"
+local theme = require "gui/theme"
+local fonts = require "gui/fonts"
+local textstyles = require "gui/textstyles"
+local textures = require "gui/textures"
 
-local constants = require "gui\\guiconstants"
+local constants = require "gui/guiconstants"
 
-local eventtypes = require "gui\\support\\eventtypes"
+local eventtypes = require "gui/support/eventtypes"
 
 _M.GUI = class()
 

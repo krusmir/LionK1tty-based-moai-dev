@@ -54,10 +54,10 @@
 
 local _M = {}
 
-require "gui\\support\\class"
+require "gui/support/class"
 
-local text = require "gui\\text"
-local imagelist = require "gui\\imagelist"
+local text = require "gui/text"
+local imagelist = require "gui/imagelist"
 
 local EventHandler = class()
 _M.AWindow = class()

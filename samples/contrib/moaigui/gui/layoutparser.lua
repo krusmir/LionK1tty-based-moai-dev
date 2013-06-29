@@ -39,11 +39,11 @@
 
 local _M = {}
 
-require "gui\\support\\class"
+require "gui/support/class"
 
-local utilities = require "gui\\support\\utilities"
-local resources = require "gui\\support\\resources"
-local fonts = require "gui\\fonts"
+local utilities = require "gui/support/utilities"
+local resources = require "gui/support/resources"
+local fonts = require "gui/fonts"
 
 _M.LayoutParser = class()
 

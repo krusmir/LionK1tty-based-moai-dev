@@ -35,15 +35,15 @@
 
 local _M = {}
 
-require "gui\\support\\class"
+require "gui/support/class"
 
-local array = require "gui\\support\\array"
-local awindow = require "gui\\awindow"
-local image = require "gui\\image"
-local button = require "gui\\button"
-local awidgetevent = require "gui\\awidgetevent"
+local array = require "gui/support/array"
+local awindow = require "gui/awindow"
+local image = require "gui/image"
+local button = require "gui/button"
+local awidgetevent = require "gui/awidgetevent"
 
-local resources = require "gui\\support\\resources"
+local resources = require "gui/support/resources"
 
 local ColumnWidget = class()
 local WidgetListColumn = class(button.Button)

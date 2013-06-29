@@ -35,11 +35,11 @@
 
 local _M = {}
 
-require "gui\\support\\class"
+require "gui/support/class"
 
-local awindow = require "gui\\awindow"
-local imagelist = require "gui\\imagelist"
-local inputconstants = require "gui\\support\\inputconstants"
+local awindow = require "gui/awindow"
+local imagelist = require "gui/imagelist"
+local inputconstants = require "gui/support/inputconstants"
 
 _M.AButton = class(awindow.AWindow)
 

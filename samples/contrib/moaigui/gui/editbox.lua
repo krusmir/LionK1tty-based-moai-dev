@@ -35,10 +35,10 @@
 
 local _M = {}
 
-require "gui\\support\\class"
+require "gui/support/class"
 
-local awindow = require "gui\\awindow"
-local awidgetevent = require "gui\\awidgetevent"
+local awindow = require "gui/awindow"
+local awidgetevent = require "gui/awidgetevent"
 
 local CURSOR = ":"
 

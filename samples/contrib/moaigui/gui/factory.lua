@@ -35,21 +35,21 @@
 
 local _M = {}
 
-require "gui\\support\\class"
+require "gui/support/class"
 
-local window = require "gui\\window"
-local label = require "gui\\label"
-local image = require "gui\\image"
-local button = require "gui\\button"
-local checkbox = require "gui\\checkbox"
-local radiobutton = require "gui\\radiobutton"
-local editbox = require "gui\\editbox"
-local scrollbar = require "gui\\scrollbar"
-local slider = require "gui\\slider"
-local progressbar = require "gui\\progressbar"
-local textbox = require "gui\\textbox"
-local widgetlist = require "gui\\widgetlist"
-local textstyles = require "gui\\textstyles"
+local window = require "gui/window"
+local label = require "gui/label"
+local image = require "gui/image"
+local button = require "gui/button"
+local checkbox = require "gui/checkbox"
+local radiobutton = require "gui/radiobutton"
+local editbox = require "gui/editbox"
+local scrollbar = require "gui/scrollbar"
+local slider = require "gui/slider"
+local progressbar = require "gui/progressbar"
+local textbox = require "gui/textbox"
+local widgetlist = require "gui/widgetlist"
+local textstyles = require "gui/textstyles"
 
 _M.Factory = class()
 

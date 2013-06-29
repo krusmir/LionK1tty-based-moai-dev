@@ -6,10 +6,10 @@
 	first column with an image.
 ]]
 
-local gui = require "gui\\gui"
-local resources = require "gui\\support\\resources"
-local filesystem = require "gui\\support\\filesystem"
-local inputconstants = require "gui\\support\\inputconstants"
+local gui = require "gui/gui"
+local resources = require "gui/support/resources"
+local filesystem = require "gui/support/filesystem"
+local inputconstants = require "gui/support/inputconstants"
 
 -- Turn off the texture loading logging
 MOAILogMgr.setLogLevel(MOAILogMgr.LOG_NONE)
@@ -43,7 +43,7 @@ g:addToResourcePath("resources", "themes")
 g:setTheme("basetheme.lua")
 
 -- The font used for text
-g:setCurrFont("default")
+g:setCurrTextStyle("default")
 
 -- Create a widget list, and have it take up the entire window
 local widgetList = g:createWidgetList()

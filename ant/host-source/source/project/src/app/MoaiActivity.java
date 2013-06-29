@@ -385,7 +385,7 @@ public class MoaiActivity extends Activity {
 
 */
         //if event is control touchpad, send the  getX and getY to EventTouchpad
-        if ((event.getSource() & InputDevice.SOURCE_CLASS_JOYSTICK) != 0){
+        if ((event.getSource() &  InputDevice.SOURCE_CLASS_POINTER) != 0){
 
                 float touchpadX = event.getX();
                 float touchpadY = event.getY();
