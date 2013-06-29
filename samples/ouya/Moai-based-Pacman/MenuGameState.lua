@@ -110,11 +110,11 @@ function MenuGameState.onOuyaButtonDownEvent(keycode,player)
         return
     end
 
-    if ( keycode == 20 and player == 0)  -- 20 is OUYA's BUTTON_DPAD_DOWN and 0 is player 1
+    if ( keycode == BUTTON_DPAD_DOWN and player == 0)  -- 20 is OUYA's BUTTON_DPAD_DOWN and 0 is player 1
     then
         MENU_GAME_STATE:incrementCursorIndex()
         MENU_GAME_STATE:updateCursorLocation()
-    elseif ( keycode == 96 and player == 0 )   --	BUTTON_O	=           96,
+    elseif ( keycode == BUTTON_O and player == 0 )   --	BUTTON_O	=           96,
     then
         MENU_GAME_STATE:onMenuSelected()
     end

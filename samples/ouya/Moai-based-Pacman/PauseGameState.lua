@@ -80,8 +80,7 @@ function PauseGameState.onOuyaButtonDownEvent(keycode,player)
         return
     end
 
-    BUTTON_MENU	=           82
-    if ( keycode == BUTTON_MENU and player == 0 )
+    if ( keycode == BUTTON_MENU and player == 0 )  --BUTTON_MENU =  82, player 0 is player 1
     then
         GAME_STATE_MACHINE:setCurrentState( INPLAY_GAME_STATE )
     end

@@ -335,11 +335,11 @@ function InPlayGameState.onOuyaButtonDownEvent(keycode,player)
         return
     end
 -- OUYA BUTTONS
-    BUTTON_DPAD_DOWN	=   20
+--[[    BUTTON_DPAD_DOWN	=   20
     BUTTON_DPAD_LEFT	=   21
     BUTTON_DPAD_RIGHT	=   22
     BUTTON_DPAD_UP	=       19
-    BUTTON_MENU	=           82
+    BUTTON_MENU	=           82]]
 
     if ( keycode == BUTTON_DPAD_UP and player == 0)
     then
