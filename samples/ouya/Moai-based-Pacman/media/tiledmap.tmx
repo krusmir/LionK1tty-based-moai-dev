@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="28" height="31" tilewidth="20" tileheight="20">
+ <tileset firstgid="1" name="pacmanTileSet" tilewidth="20" tileheight="20">
+  <image source="tiledmap.png" width="64" height="64"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="28" height="31">
+  <data encoding="base64" compression="zlib">
+   eJzdVosKwCAIvBHU///xGGwwephX5h6BbGTnnSlkBBCdbSPNAlfT0NLGnKntBQe+0PGvzI+tw6gxejQ9NxNvNR/T9+x+7tfW/DA0/jXYC5MvKz7tyvkYnBXf8U0oc0koc5X4NPUDypiSj60fTkyuq8fXws7k14pxjzXbn5Ku2pmv9qdFfkz9WD4p9p/niSfml9m76t15b0ayem8lrBef9/uu0T+a91twHqbVZmk7uuMMrQ==
+  </data>
+ </layer>
+</map>
